@@ -6,8 +6,10 @@ Attributes:
 """
 
 import re
+import sys
 import spacy
 from nltk import WordNetLemmatizer
+from debug_utilities import mem_log
 
 
 NLP = spacy.load('en')
@@ -23,8 +25,14 @@ def mp_lower(input_t):
     Returns:
         str: Lowered line
     """
+
+    mem_log(f">>>>>>>>>>>>>>>>Before operate, input: {int(sys.getsizeof(input_t) / 1048576)}Mb")
     if input_t[2]:
-        return(input_t[2]).lower().strip()
+        input_t = input_t[2].lower().strip()
+        mem_log(f"After operate operate, input: {int(sys.getsizeof(input_t) / 1048576)}Mb")
+        return(input_t)
+
+    mem_log(f"After operate operate , input: {int(sys.getsizeof(input_t) / 1048576)}Mb")
 
 
 def mp_normalize(input_t):
